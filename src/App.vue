@@ -1,11 +1,10 @@
 <script setup>
 import JardinesEtnobiologicos from '@/components/mapas/JardinesEtnobiologicos.vue'
-const public_path = process.env.BASE_URL
 </script>
 
 <template>
   <JardinesEtnobiologicos
-    :ruta_zip="`${public_path}data/hcti_jardines_etnobiologicos_210923_xy_p.zip`"
+    :ruta_zip="`data/hcti_jardines_etnobiologicos_210923_xy_p.zip`"
   />
 </template>
 
