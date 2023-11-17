@@ -129,6 +129,16 @@ const abierto = ref(false)
     }
   }
 
+  .contenido-vis {
+    .ol-viewport {
+      .ol-overlaycontainer-stopevent {
+        .sisdai-mapa-control-ajuste-vista {
+          right: 24px !important;
+        }
+      }
+    }
+  }
+
   .panel-pie-vis {
     overflow-x: hidden !important;
     .flex {
