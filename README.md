@@ -2,16 +2,27 @@
 
 Mapa de red de jardines etnobiológicos, que se incorpora en el sitio de wordpress de conahcyt
 
+> **_Limitación de responsabilidad_**
+>
+> El presente es un proyecto en construcción, por tanto el equipo del Sisdai
+> no es responsable del uso y contenido del presente recurso,
+> toda vez que se trata de una versión en su modalidad prueba, y no de una
+> versión liberada al público, por lo que una vez que sea lanzada la versión
+> final,
+> se invita a la persona usuaria a consultarla y validar sus requisitos.
+
+**Cada vez que se haga un cambio, que se manda a despliegue hay que jalarlo a embed**
+
 ## Para mandar a dirección de repositorios
 
-La direccion de repositorios es quien lo incorpora mediante un iframe, a ellos se les pasa el código compilado de la carpeta dist.
+La dirección de repositorios es quien lo incorpora mediante un iframe, a ellos se les pasa el código compilado de la carpeta dist.
 
 Para ello se tiene que:
 
 - cambiar a la rama embed, (rama donde el código esta adecuado para incorporarse a un iframe,)
-- ejecutar npm run build,
+- ejecutar `npm run build`,
 - a continuación el contenido de la carpeta dist prepararlo para mandar a Uber o a alguien de repositorios
-- editar el archivo dist/index.html y hacer que los recursos de js y ccs sean con una ruta relativa. por ejemplo si hay /css/bundle.css cambiar a css/bundle.css
+- editar el archivo _dist/index.html_ y hacer que los recursos de js y ccs sean con una ruta relativa. por ejemplo si hay `/css/bundle.css` cambiar a `css/bundle.css`
 - comprimir un zip de la carpeta dist y mandar a Repositorios
 
 ## Uso local
