@@ -67,7 +67,10 @@ const abierto = ref(false)
           </div>
         </div>
 
-        <SisdaiLeyenda para="hcti_jardines_etnobiologicos_210923_xy_p" />
+        <SisdaiLeyenda
+          para="hcti_jardines_etnobiologicos_210923_xy_p"
+          :sinControl="true"
+        />
       </div>
     </template>
 
