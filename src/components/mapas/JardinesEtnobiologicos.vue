@@ -44,9 +44,22 @@ const abierto = ref(false)
                   través de los siguientes comandos:
                 </p>
                 <ul>
-                  <li><b>Teclas</b> Navegar por el mapa y buscar funciones</li>
-                  <li><b>Tecla +</b> Acercar el mapa.</li>
-                  <li><b>Tecla -</b> Alejar el mapa.</li>
+                  <li>
+                    <b
+                      >Teclas
+                      <span class="icono-flecha-izquierda" />
+                      <span class="icono-flecha-derecha" />
+                      <span class="icono-flecha-arriba" />
+                      <span class="icono-flecha-abajo" />
+                    </b>
+                    Navegar por el mapa y buscar funciones.
+                  </li>
+                  <li>
+                    <b>Tecla <span class="icono-agregar" /></b> Acercar el mapa.
+                  </li>
+                  <li>
+                    <b>Tecla <span class="icono-restar" /></b> Alejar el mapa.
+                  </li>
                   <li><b>Tecla D</b> Rotar el mapa hacia la derecha.</li>
                   <li><b>Tecla A</b> Rotar el mapa hacia la izquierda.</li>
                   <li><b>Tecla N</b> Rotar el mapa hacia el norte.</li>
@@ -120,7 +133,7 @@ const abierto = ref(false)
       :renderizarComoImagen="true"
       :visible="true"
       :fuente="`${url_gema_geoserver}/humanidades_ciencias/ows?service=WFS&version=1.0.0&request=GetFeature&typeName=humanidades_ciencias%3Ahcti_jardines_etnobiologicos_210923_xy_p&outputFormat=application%2Fjson`"
-      :globoInformativo="f => `<p><b>${f.nom_jardin}</b></p>`"
+      :globoInformativo="f => `<b>${f.nom_jardin}</b>`"
     />
   </SisdaiMapa>
 </template>
@@ -157,6 +170,9 @@ const abierto = ref(false)
         .sisdai-mapa-control-ajuste-vista {
           right: 24px !important;
         }
+      }
+      .contenedor-globo-info {
+        padding: 8px;
       }
     }
   }
