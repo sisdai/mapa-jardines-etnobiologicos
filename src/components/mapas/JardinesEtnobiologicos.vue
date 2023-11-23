@@ -26,7 +26,7 @@ const abierto = ref(false)
           México apoyados por Consejo Nacional de Humanidades, Ciencias y
           Tecnologías (Conahcyt).
         </p>
-        <div class="m-b-1">
+        <div class="">
           <button
             class="hipervinculo m-b-1"
             @click="abierto = !abierto"
@@ -67,10 +67,15 @@ const abierto = ref(false)
           </div>
         </div>
 
-        <SisdaiLeyenda
+        <!-- <SisdaiLeyenda
           para="hcti_jardines_etnobiologicos_210923_xy_p"
           :sinControl="true"
-        />
+        /> -->
+        <p class="vis-nomenclatura">
+          <span class="figura-variable"></span>
+          Red de Jardines Etnobiológicos Conahcyt, con corte al 21 de septiembre
+          2023
+        </p>
       </div>
     </template>
 
@@ -99,7 +104,7 @@ const abierto = ref(false)
 
     <SisdaiCapaXyz :posicion="1" />
 
-    <SisdaiCapaWms
+    <!-- <SisdaiCapaWms
       id="hcti_jardines_etnobiologicos_210923_xy_p"
       nombre="Red de Jardines Etnobiológicos Conahcyt, con corte al 21 de septiembre 2023"
       :url="`${url_gema_geoserver}/wms`"
@@ -107,6 +112,15 @@ const abierto = ref(false)
         LAYERS: 'hcti_jardines_etnobiologicos_210923_xy_p',
       }"
       :posicion="2"
+    /> -->
+    <SisdaiCapaVectorial
+      id="hcti_jardines_etnobiologicos_210923_xy_p"
+      nombre="Red de Jardines Etnobiológicos Conahcyt, con corte al 21 de septiembre 2023"
+      :posicion="2"
+      :renderizarComoImagen="true"
+      :visible="true"
+      :fuente="`${url_gema_geoserver}/humanidades_ciencias/ows?service=WFS&version=1.0.0&request=GetFeature&typeName=humanidades_ciencias%3Ahcti_jardines_etnobiologicos_210923_xy_p&outputFormat=application%2Fjson`"
+      :globoInformativo="f => `<p><b>${f.nom_jardin}</b></p>`"
     />
   </SisdaiMapa>
 </template>
@@ -114,8 +128,14 @@ const abierto = ref(false)
 <style lang="scss">
 .sisdai-mapa {
   // reglas para móvil
-
   .panel-izquierda-vis {
+    .vis-nomenclatura {
+      .figura-variable {
+        background: rgba(255, 255, 255, 0.4) !important;
+        border-radius: 50% !important;
+        border: 1.25px solid rgb(51, 153, 204) !important;
+      }
+    }
     .hipervinculo {
       font-size: 0.75rem;
     }
@@ -131,7 +151,6 @@ const abierto = ref(false)
       }
     }
   }
-
   .contenido-vis {
     .ol-viewport {
       .ol-overlaycontainer-stopevent {
@@ -141,7 +160,6 @@ const abierto = ref(false)
       }
     }
   }
-
   .panel-pie-vis {
     overflow-x: hidden !important;
     .flex {
@@ -150,11 +168,9 @@ const abierto = ref(false)
       }
     }
   }
-
   .contenedor-vis-atribuciones .atribucion-sisdai {
     display: none;
   }
-
   @include mediaquery('esc') {
     // reglas para escritorio
     max-height: none !important;
@@ -171,11 +187,6 @@ const abierto = ref(false)
           text-align: right;
         }
       }
-    }
-    .panel-encabezado-vis,
-    .panel-pie-vis {
-      // max-height: none !important; // para que el encabezado y pie no hagan scroll
-      // height: min-content;
     }
   }
 }
