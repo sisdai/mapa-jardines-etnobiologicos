@@ -1,6 +1,6 @@
 # conahcyt-mapa-jardines
 
-Mapa de red de jardines etnobiológicos, que se incorpora en el sitio de wordpress de conahcyt
+Mapa de red de jardines etnobiológicos que se incorpora en el sitio de wordpress de Conahcyt
 
 > **_Limitación de responsabilidad_**
 >
