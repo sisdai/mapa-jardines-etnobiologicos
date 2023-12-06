@@ -22,7 +22,7 @@ Para ello se tiene que:
 - cambiar a la rama embed, (rama donde el código esta adecuado para incorporarse a un iframe,)
 - ejecutar `npm run build`,
 - a continuación el contenido de la carpeta dist prepararlo para mandar a Uber o a alguien de repositorios
-- editar el archivo _dist/index.html_ y hacer que los recursos de js y ccs sean con una ruta relativa. por ejemplo si hay `/css/bundle.css` cambiar a `css/bundle.css`
+- editar el archivo _dist/index.html_ y hacer que los recursos de js y css sean con una ruta relativa. por ejemplo si hay `/css/bundle.css` cambiar a `css/bundle.css`
 - comprimir un zip de la carpeta dist y mandar a Repositorios
 
 ## Uso local
