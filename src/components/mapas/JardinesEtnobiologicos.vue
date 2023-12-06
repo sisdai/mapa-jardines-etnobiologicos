@@ -10,10 +10,27 @@ const props = defineProps({
 })
 
 const abierto = ref(false)
+
+function esURL(str) {
+  try {
+    new URL(str)
+    return true
+  } catch (error) {
+    return false
+  }
+}
+
+function cuadrojardines(f) {
+  return `<p class="m-t-0 m-b--6"><b>${f.nom_jardin}</b><br />${
+    esURL(f.www)
+      ? `<a class="m-t-1" href="${f.www}" target="_blank" rel="noopener noreferrer">${f.www}</a>`
+      : `<i class="m-t-1">${f.www}</i>`
+  }</p>`
+}
 </script>
 <template>
   <SisdaiMapa
-    class="con-panel-izquierda-vis con-panel-pie-vis"
+    class="mapa-jardines con-panel-izquierda-vis con-panel-pie-vis"
     :vista="{ extension: '-118.3651,14.5321,-86.7104,32.7187' }"
   >
     <template #panel-izquierda-vis>
@@ -26,7 +43,7 @@ const abierto = ref(false)
           México apoyados por Consejo Nacional de Humanidades, Ciencias y
           Tecnologías (Conahcyt).
         </p>
-        <div class="">
+        <div>
           <button
             class="hipervinculo m-b-1"
             @click="abierto = !abierto"
@@ -80,75 +97,61 @@ const abierto = ref(false)
           </div>
         </div>
 
-        <!-- <SisdaiLeyenda
+        <SisdaiLeyenda
           para="hcti_jardines_etnobiologicos_210923_xy_p"
-          :sinControl="true"
-        /> -->
-        <p class="vis-nomenclatura">
-          <span class="figura-variable"></span>
-          Red de Jardines Etnobiológicos Conahcyt, con corte al 21 de septiembre
-          2023
-        </p>
-      </div>
-    </template>
-
-    <template #panel-pie-vis>
-      <div class="flex flex-contenido-separado">
-        <div class="columna-12-esc">
-          <p class="vis-fuente">
-            Fuente: Datos de origen del Consejo Nacional de Humanidades,
-            Ciencias y Tecnologías (Conahcyt), con corte al 21 de septiembre de
-            2023.
-          </p>
-        </div>
-        <div class="columna-4-esc texto-alineado">
-          <a
-            :href="props.ruta_zip"
-            class="boton boton-primario boton-chico descarga m-t-2"
-          >
-            Descargar datos <span class="icono-archivo-descargar"></span>
-            <span class="a11y-solo-lectura">
-              Archivo descargable en formato: zip, peso: 30 kB
-            </span>
-          </a>
-        </div>
+          sinControl
+        />
       </div>
     </template>
 
     <SisdaiCapaXyz :posicion="1" />
 
-    <!-- <SisdaiCapaWms
-      id="hcti_jardines_etnobiologicos_210923_xy_p"
-      nombre="Red de Jardines Etnobiológicos Conahcyt, con corte al 21 de septiembre 2023"
-      :url="`${url_gema_geoserver}/wms`"
-      :parametros="{
-        LAYERS: 'hcti_jardines_etnobiologicos_210923_xy_p',
-      }"
-      :posicion="2"
-    /> -->
     <SisdaiCapaVectorial
       id="hcti_jardines_etnobiologicos_210923_xy_p"
       nombre="Red de Jardines Etnobiológicos Conahcyt, con corte al 21 de septiembre 2023"
       :posicion="2"
       :renderizarComoImagen="true"
-      :visible="true"
       :fuente="`${url_gema_geoserver}/humanidades_ciencias/ows?service=WFS&version=1.0.0&request=GetFeature&typeName=humanidades_ciencias%3Ahcti_jardines_etnobiologicos_210923_xy_p&outputFormat=application%2Fjson`"
-      :globoInformativo="f => `<b>${f.nom_jardin}</b>`"
+      geometria="punto"
+      :estilo="{
+        'circulo-contorno-color': '#232323',
+        'circulo-relleno-color': '#58ADA8',
+      }"
+      :cuadroInformativo="cuadrojardines"
     />
+
+    <template #panel-pie-vis>
+      <p class="vis-fuente m-b-0">
+        Fuente: Datos de origen del Consejo Nacional de Humanidades, Ciencias y
+        Tecnologías (Conahcyt), con corte al 21 de septiembre de 2023.
+      </p>
+      <a
+        :href="props.ruta_zip"
+        class="boton boton-primario boton-chico m-t-2 m-b-1"
+      >
+        Descargar datos <span class="icono-archivo-descargar" />
+        <span class="a11y-solo-lectura">
+          Archivo descargable en formato: zip, peso: 30 kB
+        </span>
+      </a>
+    </template>
   </SisdaiMapa>
 </template>
 
 <style lang="scss">
-.sisdai-mapa {
-  // reglas para móvil
+.sisdai-mapa.mapa-jardines {
+  .cuerpo-globo-info a {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    width: auto;
+    max-width: 100%;
+  }
+  .m-b--6 {
+    margin-bottom: -6px;
+  }
+
   .panel-izquierda-vis {
-    .vis-nomenclatura {
-      .figura-variable {
-        background: rgba(255, 255, 255, 0.4) !important;
-        border-radius: 50% !important;
-        border: 1.25px solid rgb(51, 153, 204) !important;
-      }
-    }
     .hipervinculo {
       font-size: 0.75rem;
     }
@@ -164,6 +167,7 @@ const abierto = ref(false)
       }
     }
   }
+
   .contenido-vis {
     .ol-viewport {
       .ol-overlaycontainer-stopevent {
@@ -171,37 +175,34 @@ const abierto = ref(false)
           right: 24px !important;
         }
       }
-      .contenedor-globo-info {
-        padding: 8px;
-      }
     }
   }
+
   .panel-pie-vis {
-    overflow-x: hidden !important;
-    .flex {
-      .texto-alineado {
-        text-align: center;
-      }
-    }
+    display: flex !important;
+    flex-direction: column;
+    align-items: center;
   }
+
   .contenedor-vis-atribuciones .atribucion-sisdai {
     display: none;
   }
+
   @include mediaquery('esc') {
-    // reglas para escritorio
-    max-height: none !important;
-    grid-template-rows: auto 595px minmax(auto, 85px) !important; // los paneles en medio del encabezado y pie no se desborden
+    grid-template-rows: 0 1fr auto !important; // los paneles en medio del encabezado y pie no se desborden
 
     .panel-izquierda-vis {
       grid-row-end: span 2 !important; // para que el panel izquierdo use dos renglones
     }
     .panel-pie-vis {
       grid-column-start: 2 !important; // para que el pie empiece en la segunda columna
-      overflow-x: hidden !important;
-      .flex {
-        .texto-alineado {
-          text-align: right;
-        }
+      flex-direction: row;
+      gap: 16px;
+      overflow: hidden;
+
+      a.boton {
+        white-space: nowrap;
+        height: fit-content;
       }
     }
   }
