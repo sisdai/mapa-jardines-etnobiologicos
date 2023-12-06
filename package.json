@@ -12,8 +12,8 @@
   "dependencies": {
     "core-js": "^3.29.1",
     "sisdai-componentes": "git+https://codigo.conahcyt.mx/sisdai/sisdai-componentes#enis",
-    "sisdai-css": "git+https://codigo.conahcyt.mx/sisdai/sisdai-css#v0.45.7",
-    "sisdai-mapas": "git+https://codigo.conahcyt.mx/sisdai/sisdai-mapas#v1.7.0",
+    "sisdai-css": "git+https://codigo.conahcyt.mx/sisdai/sisdai-css#v0.45.9",
+    "sisdai-mapas": "git+https://codigo.conahcyt.mx/sisdai/sisdai-mapas#v1.9.0",
     "vue": "^2.7.14"
   },
   "devDependencies": {
