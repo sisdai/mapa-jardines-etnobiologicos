@@ -168,24 +168,10 @@ function cuadrojardines(f) {
     }
   }
 
-  .contenido-vis {
-    .ol-viewport {
-      .ol-overlaycontainer-stopevent {
-        .sisdai-mapa-control-ajuste-vista {
-          right: 24px !important;
-        }
-      }
-    }
-  }
-
   .panel-pie-vis {
     display: flex !important;
     flex-direction: column;
     align-items: center;
-  }
-
-  .contenedor-vis-atribuciones .atribucion-sisdai {
-    display: none;
   }
 
   @include mediaquery('esc') {
