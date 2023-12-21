@@ -150,6 +150,9 @@ function cuadrojardines(f) {
   .m-b--6 {
     margin-bottom: -6px;
   }
+  .sisdai-mapa-control-acercar-alejar > button {
+    margin: 0 !important;
+  }
 
   .panel-izquierda-vis {
     .hipervinculo {
